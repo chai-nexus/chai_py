@@ -1,20 +1,84 @@
+from dataclasses import dataclass
 from enum import Enum
+
+import requests
 
 from chai_py.auth import get_auth
 from chai_py import types, defaults
-import requests
 
 
-def get_bot(bot_uid: str):
+class BotStatus(Enum):
     """
-    Retrive a summary of a previously deployed bot.
-
-    :param bot_uid: Bot UID
-    :returns: DeployedBot
+    Active bots can be discovered by users on the app
+    and inactive bots can only be accessed with a direct link.
     """
-    auth = get_auth()
-    credentials = requests.auth.HTTPBasicAuth(auth.uid, auth.key)
+    ACTIVE = 1
+    INACTIVE = 2
+
+
+@dataclass
+class DeployedBot:
+    """
+    A currently deployed chatbot.
+
+    Args:
+        bot_uid (str): The unique ID of the chatbot.
+        name (str): The name of the chatbot.
+        developer_uid (str): ID of the developer who created the chatbot.
+        status (BotStatus): Whether the chatbot is visible to users.
+    """
+    bot_uid: str
+    name: str
+    developer_uid: str
+    status: BotStatus
+
+
+def get_deployed_bot(bot_uid):
+    """
+    Retrive a summary of a previously deployed bot including
+    whether or not it is currently active on the app.
+
+    Args:
+        bot_uid (str): The unique ID of the chatbot to summarise.
+
+    Returns:
+        DeployedBot
+    """
     url = '{}/chatbots/{}'.format(defaults.API_HOST, bot_uid)
-    resp = requests.get(url, auth=credentials)
+    resp = requests.get(url, auth=_credentials())
     assert resp.status_code == 200, resp.text
-    return types.DeployedBot.from_json(resp.json()['data'])
+    return _parse_raw_bot_dict(resp.json()['data'])
+
+
+def get_developer_bots(developer_uid: str):
+    """
+    Retrive a summary of all bots deployed by a given developer.
+
+    Args:
+        developer_uid (str): The unique developer ID.
+
+    Returns:
+        list[DeployedBot]: list of bots deployed by the given developer.
+    """
+    url = '{}/chatbots'.format(defaults.API_HOST)
+    js = {'developer_uid': developer_uid}
+    resp = requests.get(url, json=js, auth=_credentials())
+    assert resp.status_code == 200, resp.text
+    return _parse_multiple_bots_response(resp)
+
+
+def _credentials():
+    auth = get_auth()
+    return requests.auth.HTTPBasicAuth(auth.uid, auth.key)
+
+
+def _parse_multiple_bots_response(resp):
+    bots = []
+    for raw_bot_response in resp.json()['data']:
+        bots.append(_parse_raw_bot_dict(raw_bot_response))
+    return bots
+
+
+def _parse_raw_bot_dict(data):
+    status = BotStatus[data['status'].upper()]
+    return DeployedBot(data['bot_uid'], data['name'], data['developer_uid'], status)

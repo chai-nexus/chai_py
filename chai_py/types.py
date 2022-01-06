@@ -25,21 +25,3 @@ class Message:
     timestamp: int
     message_kind: MessageKind
     content: str
-
-
-class BotStatus(Enum):
-    ACTIVE = 1
-    INACTIVE = 2
-
-
-@dataclass
-class DeployedBot:
-    bot_uid: str
-    name: str
-    developer_uid: str
-    status: BotStatus
-
-    @classmethod
-    def from_json(cls, js):
-        status = BotStatus[js['status'].upper()]
-        return cls(js['bot_uid'], js['name'], js['developer_uid'], status)

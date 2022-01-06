@@ -51,7 +51,7 @@ You can also query for all the bots deployed by a given user.
 
 ```
 from chai_py import bots
-my_bots = bots.get_bots('my_developer_id')
+my_bots = bots.get_developer_bots('my_developer_id')
 ```
 
 This is a good way to remind yourself of the bots you have deployed

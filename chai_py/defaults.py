@@ -6,3 +6,5 @@ BOT_DELETER_ENDPOINT = "https://europe-west2-chai-959f8.cloudfunctions.net/bot-d
 DEFAULT_BOT_STATUS_ENDPOINT = "https://europe-west2-chai-959f8.cloudfunctions.net/bot-status"
 DEFAULT_BOT_LOGS_ENDPOINT = "https://europe-west2-chai-959f8.cloudfunctions.net/bot-logs"
 ENDPOINT = "https://europe-west2-chai-959f8.cloudfunctions.net/chai-api"
+
+API_HOST = 'http://api.chai.ml'

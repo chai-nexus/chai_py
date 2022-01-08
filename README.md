@@ -26,7 +26,7 @@ from chai_py.auth import set_auth
 set_auth('my_developer_uid', 'my_developer_key')
 ```
 
-You can generate a key and uid through the [Chai website](https://chai.ml/dev)
+You can create a key through the [Chai website](https://chai.ml/dev)
 
 ## Examples
 

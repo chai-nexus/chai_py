@@ -26,11 +26,13 @@ from chai_py.auth import set_auth
 set_auth('my_developer_uid', 'my_developer_key')
 ```
 
+You can generate a key and uid through the [Chai website](https://chai.ml/dev')
+
 ## Examples
 
-### Deploy your bot
+### Deploying a bot
 
-To upload and deploy your bot you first my package it by calling
+Once you have a bot ready to deploy you can packge it
 
 ```
 from chai_py import package, Metadata
@@ -44,12 +46,12 @@ package(
 	description='Talk to my example bot',
 	input_class=MyBotClass
     )
-    requirement=['retry']
+    requirements=['retry']
 )
 
 ```
 
-then you can upload it
+then you can upload it with
 
 ```
 from chai_py import upload_and_deploy
@@ -64,7 +66,7 @@ from chai_py.deployment import advertise_deployed_bot
 advertise_deployed_bot(bot_uid)
 ```
 
-### Query for your deployed chatbots
+### Get a list of all the chatbots you have deployed
 
 You can also query for all the bots you have deployed.
 
@@ -90,7 +92,7 @@ cloud_logs.display_logs(logs)
 
 ### Make a bot visible to the public
 
-By default a bot is inactive, it can be viewed via a link or QR code
+By default a bot is inactive, it can be viewed and shared via a link or QR code
 but will not be discoverable by users of the app.
 
 To make an app visible run
@@ -108,7 +110,7 @@ deployed.deactivate_bot(bot_uid)
 ```
 
 Permission to make a chatbot discoverable requires your developer ID to
-be whitelisted. Speak to us over WhatsApp to get permission.
+be whitelisted. Speak to us over WhatsApp and we can grant you permission.
 
 ## Testing
 

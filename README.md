@@ -35,7 +35,7 @@ You can create a key through the [Chai website](https://chai.ml/dev)
 Once you have a bot ready to deploy you can package it
 
 ```python
-from chai_py import package, Metadata
+from chai_py import package, Metadata, upload_and_deploy
 
 package(
     Metadata(
@@ -49,37 +49,29 @@ package(
     requirements=['retry']
 )
 
-```
-
-which will create a file `_package.zip` which can be uploaded. To upload it
-
-```python
-from chai_py import upload_and_deploy
 bot_uid = upload_and_deploy('_package.zip')
 wait_for_deployment(bot_uid)
+
 ```
 
-and finally you can get a link or QR code for your deployed bot using
+### Getting a shareable link or QR code to talk to your bot
 
 ```python
 from chai_py.deployment import advertise_deployed_bot
 advertise_deployed_bot(bot_uid)
 ```
 
-which you can use to talk to you bot or share with friends.
-
 ### Get a list of all the chatbots you have deployed
 
-You can also query for all the bots you have deployed.
+You can get a list of your deployed bots using
 
 ```python
 from chai_py import deployed
 my_bots = deployed.get_bots()
 ```
 
-This is a good way to remind yourself of the bots you have deployed
-in the past, their bot identifier and whether they are visable to other users
-(their status is "active").
+This is a good way to remind yourself of the bot IDs and whether they are
+discoverable by other users.
 
 ### Get the debug logs of a deployed chatbot
 

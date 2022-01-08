@@ -33,26 +33,9 @@ class DeployedBot:
     status: BotStatus
 
 
-def get_deployed_bot(bot_uid):
+def get_bots():
     """
-    Retrive a summary of a previously deployed bot including
-    whether or not it is currently active on the app.
-
-    Args:
-        bot_uid (str): The unique ID of the chatbot to summarise.
-
-    Returns:
-        DeployedBot
-    """
-    url = '{}/chatbots/{}'.format(defaults.API_HOST, bot_uid)
-    resp = requests.get(url, auth=_credentials())
-    assert resp.status_code == 200, resp.text
-    return _parse_raw_bot_dict(resp.json()['data'])
-
-
-def get_developer_bots(developer_uid: str):
-    """
-    Retrive a summary of all bots deployed by a given developer.
+    Retrive a summary of all bots deployed by a developer.
 
     Args:
         developer_uid (str): The unique developer ID.
@@ -61,10 +44,42 @@ def get_developer_bots(developer_uid: str):
         list[DeployedBot]: list of bots deployed by the given developer.
     """
     url = '{}/chatbots'.format(defaults.API_HOST)
-    js = {'developer_uid': developer_uid}
+    js = {'developer_uid': _get_developer_uid()}
     resp = requests.get(url, json=js, auth=_credentials())
     assert resp.status_code == 200, resp.text
     return _parse_multiple_bots_response(resp)
+
+
+def activate_bot(bot_uid: str):
+    """
+    Activate a bot so it can be discovered by users on the app.
+
+    Args:
+        bot_uid (str): the unique ID of the bot to make visibile
+    """
+    url = '{}/chatbots/{}'.format(defaults.API_HOST, bot_uid)
+    js = {'status': 'active'}
+    resp = requests.post(url, json=js, auth=_credentials())
+    assert resp.status_code == 200, resp.text
+    return js
+
+
+def deactivate_bot(bot_uid: str):
+    """
+    Deactivate a bot so it can not be discovered by users on the app.
+
+    Args:
+        bot_uid (str): the unique ID of the bot to remove from visibility.
+    """
+    url = '{}/chatbots/{}'.format(defaults.API_HOST, bot_uid)
+    js = {'status': 'inactive'}
+    resp = requests.post(url, json=js, auth=_credentials())
+    assert resp.status_code == 200, resp.text
+    return js
+
+
+def _get_developer_uid():
+    return get_auth().uid
 
 
 def _credentials():

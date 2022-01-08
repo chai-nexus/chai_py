@@ -27,7 +27,6 @@ Tests can be run using [pytest](http://pytest.org/).
 You must authenticate using your developer id and key before various
 operations are possible.
 
-
 ```python
 from chai_py.auth import set_auth
 set_auth('my_developer_uid', 'my_developer_key')
@@ -35,31 +34,51 @@ set_auth('my_developer_uid', 'my_developer_key')
 
 ## Examples
 
-### Query for a deployed chatbots
+### Query for your deployed chatbots
 
-You can request details of a deployed bot using the bot uid
-
-```
-from chai_py import bots
-bot = bots.get_bot('_bot_id')
-```
-
-for example to check of whether the bot can be seen on the app
-by other users (it has an "active" status).
-
-You can also query for all the bots deployed by a given user.
+You can also query for all the bots you have deployed.
 
 ```
-from chai_py import bots
-my_bots = bots.get_developer_bots('my_developer_id')
+from chai_py import deployed
+my_bots = deployed.get_bots()
 ```
 
 This is a good way to remind yourself of the bots you have deployed
-in the past and their bot ids.
+in the past, their bot identifier and whether they are visable to other users
+(their status is "active").
 
-## Colab Notebook
+### Get the debug logs of a deployed chatbot
 
-Alternatively, check out the [notebook](https://colab.research.google.com/drive/1YB6mQkcmisEBIHOjvGnWi0z9lLiaRNT5)! 
+If you bot is failing to respond it may be that it has an error.  You
+can retrieve the logs in order to investigate further
+
+```
+from chai_py import cloud_logs
+logs = cloud_logs.get_logs(bot_uid)
+cloud_logs.display_logs(logs)
+```
+
+### Make a bot visible to the public
+
+By default a bot is inactive, it can be viewed via a link or QR code
+but will not be discoverable by users of the app.
+
+To make an app visible run
+
+```
+from chai_py import deployed
+deployed.activate_bot(bot_uid)
+```
+
+and to make a bot not discoverable run
+
+```
+from chai_py import deployed
+deployed.deactivate_bot(bot_uid)
+```
+
+Permission to make a chatbot discoverable requires your developer ID to
+be whitelisted.
 
 ## Requirements
 

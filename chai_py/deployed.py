@@ -37,11 +37,8 @@ def get_bots():
     """
     Retrive a summary of all bots deployed by a developer.
 
-    Args:
-        developer_uid (str): The unique developer ID.
-
     Returns:
-        list[DeployedBot]: list of bots deployed by the given developer.
+        list[DeployedBot]: list of bots you have deployed.
     """
     url = '{}/chatbots'.format(defaults.API_HOST)
     js = {'developer_uid': _get_developer_uid()}

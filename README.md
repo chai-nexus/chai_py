@@ -34,7 +34,7 @@ You can generate a key and uid through the [Chai website](https://chai.ml/dev)
 
 Once you have a bot ready to deploy you can package it
 
-```
+```python
 from chai_py import package, Metadata
 
 package(
@@ -53,7 +53,7 @@ package(
 
 which will create a file `_package.zip` which can be uploaded. To upload it
 
-```
+```python
 from chai_py import upload_and_deploy
 bot_uid = upload_and_deploy('_package.zip')
 wait_for_deployment(bot_uid)
@@ -61,7 +61,7 @@ wait_for_deployment(bot_uid)
 
 and finally you can get a link or QR code for your deployed bot using
 
-```
+```python
 from chai_py.deployment import advertise_deployed_bot
 advertise_deployed_bot(bot_uid)
 ```
@@ -72,7 +72,7 @@ which you can use to talk to you bot or share with friends.
 
 You can also query for all the bots you have deployed.
 
-```
+```python
 from chai_py import deployed
 my_bots = deployed.get_bots()
 ```
@@ -86,7 +86,7 @@ in the past, their bot identifier and whether they are visable to other users
 If you bot is failing to respond it may be that it has an error.  You
 can retrieve the logs in order to investigate further
 
-```
+```python
 from chai_py import cloud_logs
 logs = cloud_logs.get_logs(bot_uid)
 cloud_logs.display_logs(logs)
@@ -99,14 +99,14 @@ but will not be discoverable by users of the app.
 
 To make an app visible run
 
-```
+```python
 from chai_py import deployed
 deployed.activate_bot(bot_uid)
 ```
 
 and to make a bot not discoverable run
 
-```
+```python
 from chai_py import deployed
 deployed.deactivate_bot(bot_uid)
 ```

@@ -35,7 +35,7 @@ You can create a key through the [Chai website](https://chai.ml/dev)
 Once you have a bot ready to deploy you can package it
 
 ```python
-from chai_py import package, Metadata, upload_and_deploy
+from chai_py import package, Metadata, upload_and_deploy, wait_for_deployment
 
 package(
     Metadata(

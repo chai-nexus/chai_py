@@ -32,7 +32,7 @@ You can generate a key and uid through the [Chai website](https://chai.ml/dev)
 
 ### Deploying a bot
 
-Once you have a bot ready to deploy you can packge it
+Once you have a bot ready to deploy you can package it
 
 ```
 from chai_py import package, Metadata
@@ -51,7 +51,7 @@ package(
 
 ```
 
-then you can upload it with
+which will create a file `_package.zip` which can be uploaded. To upload it
 
 ```
 from chai_py import upload_and_deploy
@@ -65,6 +65,8 @@ and finally you can get a link or QR code for your deployed bot using
 from chai_py.deployment import advertise_deployed_bot
 advertise_deployed_bot(bot_uid)
 ```
+
+which you can use to talk to you bot or share with friends.
 
 ### Get a list of all the chatbots you have deployed
 

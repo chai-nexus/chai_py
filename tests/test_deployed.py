@@ -1,5 +1,6 @@
-import pytest
 import mock
+import pytest
+import requests
 
 from chai_py import deployed as dep
 from chai_py import defaults
@@ -53,7 +54,7 @@ def test_activate_bot(post):
     post.assert_called_with(
         '{}/chatbots/bot_123'.format(defaults.API_HOST),
         json={'status': 'active'},
-        auth=mock.ANY
+        auth=requests.auth.HTTPBasicAuth('test_uid', 'test_key')
     )
 
 
@@ -70,5 +71,5 @@ def test_deactivate_bot(post):
     post.assert_called_with(
         '{}/chatbots/bot_123'.format(defaults.API_HOST),
         json={'status': 'inactive'},
-        auth=mock.ANY
+        auth=requests.auth.HTTPBasicAuth('test_uid', 'test_key')
     )

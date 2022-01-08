@@ -16,12 +16,6 @@ You can install chai_py using pip
 A quick start guide is available [here](https://chai.ml/docs/), with a minimal example available on GitHub 
 [here](https://github.com/chai-nexus/chai_py_quickstart).
 
-### Testing
-
-Tests can be run using [pytest](http://pytest.org/).
-
-    $ python -m pytest
-
 ## Configuration
 
 You must authenticate using your developer id and key before various
@@ -33,6 +27,42 @@ set_auth('my_developer_uid', 'my_developer_key')
 ```
 
 ## Examples
+
+### Deploy your bot
+
+To upload and deploy your bot you first my package it by calling
+
+```
+from chai_py import package, Metadata
+
+package(
+    Metadata(
+        name='My Bot Name',
+	image_url='http://url_of_image.jpg',
+	color='f1abab',
+	developer_uid='my_developer_uid',
+	description='Talk to my example bot',
+	input_class=MyBotClass
+    )
+    requirement=['retry']
+)
+
+```
+
+then you can upload it
+
+```
+from chai_py import upload_and_deploy
+bot_uid = upload_and_deploy('_package.zip')
+wait_for_deployment(bot_uid)
+```
+
+and finally you can get a link or QR code for your deployed bot using
+
+```
+from chai_py.deployment import advertise_deployed_bot
+advertise_deployed_bot(bot_uid)
+```
 
 ### Query for your deployed chatbots
 
@@ -78,7 +108,14 @@ deployed.deactivate_bot(bot_uid)
 ```
 
 Permission to make a chatbot discoverable requires your developer ID to
-be whitelisted.
+be whitelisted. Speak to us over WhatsApp to get permission.
+
+## Testing
+
+Tests can be run using [pytest](http://pytest.org/).
+
+    $ python -m pytest
+
 
 ## Requirements
 
@@ -88,5 +125,7 @@ Manual workarounds exist (see [here](https://stackoverflow.com/q/1868714)), enab
 versions of Python. Other potential limiting factors include the use of `asyncio.run()`, and of `async` in general.
 
 ## Get Involved
+
+Speak to us on [Whatsapp](https://chat.whatsapp.com/GvdhL4f3304FxcAxZEbpi4)
 
 Come join us on [Discord](https://discord.gg/YfrVwBtYWb)!

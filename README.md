@@ -63,15 +63,13 @@ advertise_deployed_bot(bot_uid)
 
 ### Get a list of all the chatbots you have deployed
 
-You can get a list of your deployed bots using
+This is a good way to remind yourself of the bot IDs and whether they are
+discoverable by other users.
 
 ```python
 from chai_py import deployed
 my_bots = deployed.get_bots()
 ```
-
-This is a good way to remind yourself of the bot IDs and whether they are
-discoverable by other users.
 
 ### Get the debug logs of a deployed chatbot
 

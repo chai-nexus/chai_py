@@ -63,7 +63,7 @@ def activate_bot(bot_uid: str):
 
 def deactivate_bot(bot_uid: str):
     """
-    Deactivate a bot so it can not be discovered by users on the app.
+    Deactivate a bot so it cannot be discovered by users on the app.
 
     Args:
         bot_uid (str): the unique ID of the bot to remove from visibility.

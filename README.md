@@ -114,7 +114,6 @@ Tests can be run using [pytest](http://pytest.org/).
 
     $ python -m pytest
 
-
 ## Requirements
 
 Python 3.7 or later is required.

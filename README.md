@@ -23,6 +23,7 @@ operations are possible.
 
 ```python
 from chai_py.auth import set_auth
+
 set_auth('my_developer_uid', 'my_developer_key')
 ```
 
@@ -58,6 +59,7 @@ wait_for_deployment(bot_uid)
 
 ```python
 from chai_py.deployment import advertise_deployed_bot
+
 advertise_deployed_bot(bot_uid)
 ```
 
@@ -68,6 +70,7 @@ discoverable by other users.
 
 ```python
 from chai_py import deployed
+
 my_bots = deployed.get_bots()
 ```
 
@@ -78,6 +81,7 @@ can retrieve the logs in order to investigate further
 
 ```python
 from chai_py import cloud_logs
+
 logs = cloud_logs.get_logs(bot_uid)
 cloud_logs.display_logs(logs)
 ```
@@ -91,13 +95,13 @@ To make an app visible run
 
 ```python
 from chai_py import deployed
+
 deployed.activate_bot(bot_uid)
 ```
 
 and to make a bot not discoverable run
 
 ```python
-from chai_py import deployed
 deployed.deactivate_bot(bot_uid)
 ```
 

@@ -91,7 +91,7 @@ cloud_logs.display_logs(logs)
 By default a bot is inactive, it can be viewed and shared via a link or QR code
 but will not be discoverable by users of the app.
 
-To make an app visible run
+To make a bot visible to all users run
 
 ```python
 from chai_py import deployed

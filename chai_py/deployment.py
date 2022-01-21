@@ -14,7 +14,7 @@ from chai_py.defaults import ENDPOINT
 from chai_py.notebook_utils import IS_NOTEBOOK, show_qr
 
 
-def upload_and_deploy(package: AnyStr, bot_uid: str = None) -> str:
+def upload_and_deploy(package: AnyStr, bot_uid: str = None, useDeployment = True) -> str:
     """Uploads the given archive, triggering deployment of the chatbot.
 
     :param package: Path to the packaged chatbot zip.
@@ -25,7 +25,7 @@ def upload_and_deploy(package: AnyStr, bot_uid: str = None) -> str:
 
     deployment_file = package.parent / "_deployment"
 
-    if deployment_file.exists() and bot_uid is None:
+    if deployment_file.exists() and bot_uid is None and useDeployment:
         with deployment_file.open("r") as f:
             previous_bot_uid = f.read().strip()
         print("Detected previous deployment from this location. Use the same bot UID as before?")
